@@ -1,78 +1,167 @@
-/* ---------- GLOBAL ---------- */
+/* ---------------------- GLOBAL ---------------------- */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #0f0f0f;
-  color: white;
 }
 
-/* ---------- NAVBAR ---------- */
+/* ---------------------- LOGIN PAGE ---------------------- */
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blur {
+  filter: blur(4px);
+}
+
+.login-box {
+  width: 320px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #aaa;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-box h2 {
+  text-align: center;
+}
+
+input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+button {
+  background: red;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ---------------------- MODAL ---------------------- */
+.modal {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: black;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 8px;
+  z-index: 20;
+}
+
+/* ---------------------- NAVBAR ---------------------- */
 .navbar {
-  background: #202020;
-  padding: 10px 20px;
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.nav-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
 }
 
-.navbar-title {
-  color: white;
-  text-decoration: none;
+.yt-icon {
+  color: red;
+  font-size: 35px;
 }
 
-.navbar input {
-  padding: 6px 12px;
-  border-radius: 20px;
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-icon {
+  font-size: 30px;
+}
+
+.logout-btn {
+  background: transparent;
   border: none;
-  width: 220px;
-  background: #333;
-  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  color: black;
 }
 
-/* ---------- VIDEO CARD ---------- */
+/* ---------------------- SIDEBAR ---------------------- */
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 60px);
+  background: #f3f3f3;
+  padding: 20px 10px;
+  border-right: 1px solid #ddd;
+}
+
+.side-item {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.side-item:hover {
+  background: #e0e0e0;
+  transform: scale(1.03);
+  transition: 0.2s ease;
+}
+
+/* ---------------------- USER PAGE ---------------------- */
+.user-layout {
+  display: flex;
+}
+
+.content {
+  padding: 20px;
+  width: 100%;
+}
+
+/* ---------------------- VIDEO GRID ---------------------- */
+.video-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
 .video-card {
-  width: 250px;
-  margin: 10px;
-  background: #181818;
-  border-radius: 10px;
+  background: white;
   padding: 10px;
-  color: white;
-  text-decoration: none;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #ccc;
+  transition: 0.25s;
 }
 
 .video-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
 }
 
-.video-card img {
+.video-card iframe {
   width: 100%;
-  border-radius: 10px;
+  height: 200px;
+  border-radius: 8px;
+  border: none;
 }
 
-/* ---------- VIDEO LIST ---------- */
-.video-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* ---------- WATCH PAGE ---------- */
-.watch-container {
-  background: #0f0f0f;
-  color: white;
-  min-height: 100vh;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.back-btn {
-  color: lightblue;
-  text-decoration: none;
-}
-
-.player {
-  border-radius: 10px;
+.video-card h3 {
   margin-top: 10px;
+  font-size: 16px;
 }

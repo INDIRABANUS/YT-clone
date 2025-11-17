@@ -1,26 +1,32 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import "../styles.css";
+import { FaYoutube, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ onSearch }) {
-  const [query, setQuery] = useState('')
+export default function Navbar() {
+  const navigate = useNavigate();
+  const email = localStorage.getItem("userEmail");
+  const username = email ? email.split("@")[0] : "User";
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value)
-    onSearch && onSearch(e.target.value)
+  function logout() {
+    localStorage.removeItem("userEmail");
+    navigate("/");
   }
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="navbar-title">
-        <h2>YouTube Clone</h2>
-      </Link>
+    <div className="navbar">
+      <div className="nav-left">
+        <FaYoutube className="yt-icon" />
+        <h2>YouTube</h2>
+      </div>
 
-      <input
-        type="text"
-        placeholder="Search"
-        value={query}
-        onChange={handleSearch}
-      />
-    </nav>
-  )
+      <div className="nav-right">
+        <span className="username">{username}</span>
+        <FaUserCircle className="profile-icon" />
+
+        <button className="logout-btn" onClick={logout}>
+          <FaSignOutAlt />
+        </button>
+      </div>
+    </div>
+  );
 }
