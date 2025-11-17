@@ -1,72 +1,72 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import "../styles.css";
 
 export default function UserPage() {
-  const [category, setCategory] = useState("Home");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const email = location.state?.email || "user";
+  const username = email.split("@")[0];
+
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const videos = [
-    {
-      id: 1,
-      title: "React JS Tutorial",
-      cat: "Home",
-      url: "https://www.youtube.com/embed/bMknfKXIFA8",
-    },
-    {
-      id: 2,
-      title: "Best Action Movies",
-      cat: "Movies",
-      url: "https://www.youtube.com/embed/YoHD9XEInc0",
-    },
-    {
-      id: 3,
-      title: "Top Music Hits",
-      cat: "Music",
-      url: "https://www.youtube.com/embed/kXYiU_JCYtU",
-    },
-    {
-      id: 4,
-      title: "NBA Highlights",
-      cat: "Sports",
-      url: "https://www.youtube.com/embed/3SLR0eWs2co",
-    },
-    {
-      id: 5,
-      title: "GTA V Gameplay",
-      cat: "Gaming",
-      url: "https://www.youtube.com/embed/QkkoHAzjnUs",
-    },
+    { id: 1, title: "React Tutorial", category: "Education", url: "https://www.youtube.com/embed/w7ejDZ8SWv8" },
+    { id: 2, title: "JavaScript Basics", category: "Education", url: "https://www.youtube.com/embed/PkZNo7MFNFg" },
+    { id: 3, title: "CSS Full Course", category: "Education", url: "https://www.youtube.com/embed/1Rs2ND1ryYc" },
+    { id: 4, title: "Gaming Montage", category: "Gaming", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+    { id: 5, title: "Top 10 Goals", category: "Sports", url: "https://www.youtube.com/embed/y6120QOlsfU" },
+    { id: 6, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 7, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 8, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 9, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 10, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 11, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 12, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 13, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"},
+    { id: 14, title: "New Music Video", category: "Music", url: "https://www.youtube.com/embed/w7ejDZ8SWv8"}
   ];
 
-  const filteredVideos = category === "Home"
-    ? videos
-    : videos.filter((v) => v.cat === category);
+  const filteredVideos = videos.filter(video => {
+    const matchSearch = video.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchCategory =
+      selectedCategory === "All" || video.category === selectedCategory;
+
+    return matchSearch && matchCategory;
+  });
+
+  function logout() {
+    navigate("/");
+  }
 
   return (
-    <div>
-      <Navbar />
+    <div className="user-container">
+      <Navbar
+        name={username}
+        toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+        onLogout={logout}
+        onSearch={setSearchTerm}
+      />
 
-      <div className="user-layout">
-        <Sidebar onCategorySelect={setCategory} />
+      <Sidebar
+        isOpen={sidebarOpen}
+        onCategory={(cat) => setSelectedCategory(cat)}
+      />
 
-        <div className="content">
-          <h2>{category} Videos</h2>
-
-          <div className="video-grid">
-            {filteredVideos.map((v) => (
-              <div className="video-card" key={v.id}>
-                <iframe
-                  src={v.url}
-                  title={v.title}
-                  allowFullScreen
-                ></iframe>
-                <h3>{v.title}</h3>
-              </div>
-            ))}
+      <div className={`video-container ${sidebarOpen ? "shift" : ""}`}>
+        {filteredVideos.map((video) => (
+          <div key={video.id} className="video-card">
+            <iframe
+              src={video.url}
+              allowFullScreen
+              title={video.title}
+            ></iframe>
+            <h4>{video.title}</h4>
           </div>
-
-        </div>
+        ))}
       </div>
     </div>
   );

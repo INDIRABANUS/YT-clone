@@ -1,32 +1,28 @@
-import "../styles.css";
-import { FaYoutube, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaYoutube, FaUserCircle } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-export default function Navbar() {
-  const navigate = useNavigate();
-  const email = localStorage.getItem("userEmail");
-  const username = email ? email.split("@")[0] : "User";
-
-  function logout() {
-    localStorage.removeItem("userEmail");
-    navigate("/");
-  }
-
+export default function Navbar({ name, toggleSidebar, onLogout, onSearch }) {
   return (
-    <div className="navbar">
+    <nav className="navbar">
+      <GiHamburgerMenu className="hamburger" onClick={toggleSidebar} />
+
       <div className="nav-left">
-        <FaYoutube className="yt-icon" />
-        <h2>YouTube</h2>
+        <FaYoutube className="yt-logo" />
+        <h2>YouTube Clone</h2>
       </div>
+
+      <input
+        type="text"
+        placeholder="Search videos..."
+        className="search-input"
+        onChange={(e) => onSearch(e.target.value)}
+      />
 
       <div className="nav-right">
-        <span className="username">{username}</span>
+        <span className="username">{name}</span>
         <FaUserCircle className="profile-icon" />
-
-        <button className="logout-btn" onClick={logout}>
-          <FaSignOutAlt />
-        </button>
+        <button className="logout-btn" onClick={onLogout}>Logout</button>
       </div>
-    </div>
+    </nav>
   );
 }
