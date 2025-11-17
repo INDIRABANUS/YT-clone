@@ -1,0 +1,78 @@
+/* ---------- GLOBAL ---------- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background: #202020;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-title {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar input {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  width: 220px;
+  background: #333;
+  color: white;
+}
+
+/* ---------- VIDEO CARD ---------- */
+.video-card {
+  width: 250px;
+  margin: 10px;
+  background: #181818;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.video-card:hover {
+  transform: scale(1.05);
+}
+
+.video-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* ---------- VIDEO LIST ---------- */
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---------- WATCH PAGE ---------- */
+.watch-container {
+  background: #0f0f0f;
+  color: white;
+  min-height: 100vh;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.back-btn {
+  color: lightblue;
+  text-decoration: none;
+}
+
+.player {
+  border-radius: 10px;
+  margin-top: 10px;
+}
